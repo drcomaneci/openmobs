@@ -4,10 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -29,6 +31,7 @@ public class LoginActivity extends Activity {
      * The default email to populate the email field with.
      */
     public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
+    public static final String TAG = "LoginActivity";
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -79,6 +82,18 @@ public class LoginActivity extends Activity {
                 attemptLogin();
             }
         });
+        
+        Log.i(TAG, "Starting AllJoyn Service");
+		Intent serviceIntent = new Intent(this, AllJoynCommunicationService.class);
+		startService(serviceIntent);
+        
+        /*findViewById(R.id.start_alljoyn).setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+			}
+		});*/
     }
 
 
