@@ -9,5 +9,14 @@ import org.alljoyn.bus.annotation.BusSignal;
 @BusInterface (name = "com.cdgnet.openmobs.NetSharer")
 public interface NetSharerInterface {
 	 @BusMethod
-	 public String GetSharingParameters() throws  BusException;
+	 public String GetDeviceId() throws  BusException;
+	 
+	 @BusMethod 
+	 public double GetPrice1() throws BusException;
+	 
+	 @BusMethod 
+	 public double GetPrice2() throws BusException;
+	 
+	 @BusMethod
+	 public long GetRemainingTraffic() throws BusException;
 }

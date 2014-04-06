@@ -1,5 +1,7 @@
 package com.cdgnet.openmobs;
 
+import java.util.Map.Entry;
+
 import org.alljoyn.bus.BusAttachment;
 import org.alljoyn.bus.BusException;
 import org.alljoyn.bus.BusListener;
@@ -22,6 +24,7 @@ import android.os.Messenger;
 import android.provider.Settings.Secure;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.util.Pair;
 
 public class AllJoynCommunicationService extends Service {
 
@@ -196,7 +199,11 @@ public class AllJoynCommunicationService extends Service {
 
                 	NetSharerInterface nsproxy = proxyObj.getInterface(NetSharerInterface.class);
                 	try {
-						Log.i(TAG, "Call to getSharingParameters: "+ nsproxy.GetSharingParameters());
+						Log.i(TAG, "Call to update SharingInformation for "+ nsproxy.GetDeviceId());
+						mNetSharer.UpdateSharingInformation(nsproxy);
+						for(Entry<String, SharingInformation> e : mNetSharer.getSharingDevices().entrySet()){
+							Log.i(TAG, e.getKey() + " = " + e.getValue());
+						}
 					} catch (BusException e) {
 						Log.e(TAG, e.getMessage());
 						e.printStackTrace();
